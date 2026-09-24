@@ -514,10 +514,18 @@
         </div>
 
         <div class="project-card fade-in">
-            <div class="project-tags"><span>MCP</span><span>Agents SDK</span><span>Cloudflare Workers</span></div>
-            <h3>Model Context Protocol Integrations</h3>
+            <div class="project-tags"><span>Android</span><span>BLE</span><span>Kotlin</span><span>Even G2</span></div>
+            <h3>G2 Companion Apps</h3>
             <p>
-                Built MCP servers and bridges that give local agent runtimes access to internal tools, services, and data — including a Cloudflare Worker bridge for the Even Realities G2 smart glasses that routes voice commands through the same agent pipeline I use on desktop.
+                Two Android apps (Kotlin/Jetpack Compose) for the Even Realities G2 smart glasses: a BLE companion for telemetry, camera shutter, and alarm control, and a media remote that broadcasts playback state to the glasses HUD. Both shipped to <strong>abalingit/g2-android-control</strong> and <strong>abalingit/media-control</strong> on GitHub.
+            </p>
+        </div>
+
+        <div class="project-card fade-in">
+            <div class="project-tags"><span>MCP</span><span>Workers</span><span>Agents SDK</span></div>
+            <h3>G2 Bridge &amp; MCP Integrations</h3>
+            <p>
+                Cloudflare Worker that routes G2 glasses voice commands to the OpenClaw agent pipeline (with markdown cleanup, auth, health checks), plus MCP servers that give local agent runtimes access to internal tools and services. The G2 bridge is live at <strong>g2.omghi.lol</strong> behind a Cloudflare tunnel.
             </p>
         </div>
 
@@ -530,18 +538,18 @@
         </div>
 
         <div class="project-card fade-in">
-            <div class="project-tags"><span>Home Assistant</span><span>SolarEdge</span><span>Docker</span></div>
-            <h3>Home Automation &amp; Energy Monitoring</h3>
+            <div class="project-tags"><span>n8n</span><span>NetWatch</span><span>Pi-hole</span></div>
+            <h3>NetWatch Network Monitoring</h3>
             <p>
-                100TB+ Unraid server running the whole media stack (Sonarr, Radarr, Plex, *arr suite), plus Home Assistant OS in a VM for lights, locks, sensors, and solar energy automation. SolarEdge fully integrated — automated WOL for the GPU server during peak solar hours.
+                n8n pipeline that collects metrics from a Pi-hole DNS server and NetWatch (Raspberry Pi 5) every 6 hours, cross-references with NetData on the Unraid host, and sends anomaly alerts to Telegram. Includes a custom Python collector that feeds Pi-hole stats into NetData's charting engine.
             </p>
         </div>
 
         <div class="project-card fade-in">
-            <div class="project-tags"><span>Even G2</span><span>Wearables</span><span>Voice UI</span></div>
-            <h3>HUD AI Agent (Even Realities G2)</h3>
+            <div class="project-tags"><span>Node.js</span><span>MCP</span><span>Home Assistant</span></div>
+            <h3>HA Proxy — MCP Cold-Start Fix</h3>
             <p>
-                Integrating smart glasses as a voice-driven AI terminal — the same agent, memory, and tools from my desktop, delivered through a monochrome HUD. In progress: proactive notifications, context-aware briefings, and glanceable lab alerts.
+                Home Assistant's MCP integration had ~2-minute cold starts on model context queries. Built a persistent Node.js HTTP proxy (port 9876) that keeps the HA connection warm and responds in ~40ms. Includes a CLI wrapper, watchdog script, and stdin client for ergonomic use.
             </p>
         </div>
     </section>
