@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew Balingit · Infrastructure & Collaboration Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0a0b;
+            --surface: #121213;
+            --surface-2: #18181a;
+            --surface-3: #1e1e21;
+            --border: #222225;
+            --text: #e4e4e7;
+            --text-secondary: #9f9fa9;
+            --text-tertiary: #6b6b75;
+            --accent: #d4a373;
+            --accent-dim: #8b6f4e;
+            --accent-glow: rgba(212, 163, 115, 0.06);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --max-width: 820px;
+            --nav-height: 64px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-height);
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(16px) saturate(1.2);
+            -webkit-backdrop-filter: blur(16px) saturate(1.2);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        nav .inner {
+            width: 100%;
+            max-width: var(--max-width);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav .name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+            color: var(--text);
+        }
+        nav .links { display: flex; gap: 28px; }
+        nav .links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 450;
+            transition: color 0.2s;
+        }
+        nav .links a:hover { color: var(--accent); }
+
+        /* ── Main ── */
+        main {
+            padding-top: var(--nav-height);
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        section:last-of-type { border-bottom: none; }
+
+        /* ── Hero ── */
+        #hero {
+            padding-top: 100px;
+            padding-bottom: 80px;
+            border-bottom: 1px solid var(--border);
+        }
+        #hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+        #hero .title {
+            font-size: 1.15rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        #hero .tagline {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            line-height: 1.7;
+        }
+        #hero .tagline em { color: var(--text); font-style: normal; }
+
+        /* ── Section Headers ── */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+        h2 .anchor {
+            color: var(--accent-dim);
+            font-weight: 400;
+            margin-right: 8px;
+        }
+        .section-sub {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* ── About ── */
+        #about p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            max-width: 680px;
+        }
+        #about p:last-child { margin-bottom: 0; }
+
+        /* ── Experience ── */
+        .timeline { position: relative; }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 36px;
+            padding-bottom: 40px;
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 10px;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+        .timeline-item:last-child::before { display: none; }
+
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: var(--surface-3);
+            border: 2px solid var(--accent-dim);
+            z-index: 1;
+        }
+
+        .timeline-org {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .timeline-role {
+            font-size: 0.92rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            margin-bottom: 14px;
+        }
+        .timeline-item ul {
+            list-style: none;
+            padding: 0;
+        }
+        .timeline-item ul li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .timeline-item ul li:last-child { margin-bottom: 0; }
+        .timeline-item ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent-dim);
+        }
+
+        /* ── Skills ── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .skill-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: border-color 0.2s;
+        }
+        .skill-card:hover { border-color: var(--accent-dim); }
+        .skill-card h3 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        .skill-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ── Lab / Projects ── */
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .project-card:hover { border-color: var(--accent-dim); background: var(--surface-2); }
+        .project-card:last-child { margin-bottom: 0; }
+        .project-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .project-card .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .project-card .project-tags span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+            background: var(--accent-glow);
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 163, 115, 0.15);
+        }
+        .project-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ── Contact ── */
+        #contact {
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin-top: 8px;
+        }
+        .contact-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .contact-links a:hover { color: var(--accent); }
+
+        /* ── Resume Download ── */
+        .resume-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding: 10px 20px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .resume-cta:hover {
+            border-color: var(--accent-dim);
+            background: var(--surface-3);
+            color: var(--accent);
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: var(--text-tertiary);
+            font-size: 0.78rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            #hero h1 { font-size: 2.2rem; }
+            #hero { padding-top: 60px; padding-bottom: 48px; }
+            section { padding: 48px 0; }
+            nav .links { gap: 16px; }
+            nav .links a { font-size: 0.8rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .timeline-item { padding-left: 28px; }
+            .contact-links { flex-direction: column; gap: 16px; }
+        }
+
+        @media (max-width: 480px) {
+            #hero h1 { font-size: 1.8rem; }
+            nav .name { font-size: 0.85rem; }
+            .timeline-org { font-size: 1rem; }
+        }
+
+        /* ── Fade-in on scroll (simple) ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="inner">
+        <a href="#hero" class="name" style="text-decoration:none;color:inherit">Andrew Balingit</a>
+        <div class="links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#lab">Lab</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<main>
+
+    <!-- ─── Hero ─── -->
+    <section id="hero">
+        <h1>Andrew Balingit</h1>
+        <div class="title">Senior Enterprise Infrastructure &amp; Collaboration Engineer</div>
+        <div class="tagline">
+            I build and run the systems people work in every day — <em>Google Workspace, Slack, ServiceNow, Jira</em> — and automate the tedious parts with <em>Python and APIs</em>. 15+ years across Netflix and Google, lately applying the same discipline to <em>local LLMs, MCP, and agent workflows</em>.
+        </div>
+    </section>
+
+    <!-- ─── About ─── -->
+    <section id="about">
+        <h2><span class="anchor">#</span>About</h2>
+        <div class="section-sub">Infrastructure engineer by trade, automation addict by inclination.</div>
+        <p>
+            I've spent the last fifteen years making enterprise collaboration technology work at scale — first at Google, then for over a decade at Netflix. I own the full stack: tenant configuration, identity &amp; access, endpoint lifecycles, vendor negotiations, and the glue scripts that tie it all together.
+        </p>
+        <p>
+            I'm a <strong>CTS-certified</strong> engineer with hands-on depth in <strong>Linux, Docker, networking, and cloud SaaS governance</strong>. When I'm not keeping executive all-hands running or migrating thousands of users with zero downtime, I'm in my homelab running Ollama on an RTX 5080, wiring up MCP agents, or tinkering with the home automation stack.
+        </p>
+        <p>
+            I care about reliable, boring infrastructure — the kind that stays out of people's way so they can do their actual work.
+        </p>
+    </section>
+
+    <!-- ─── Experience ─── -->
+    <section id="experience">
+        <h2><span class="anchor">#</span>Experience</h2>
+        <div class="section-sub">Where I've done the work.</div>
+        <div class="timeline">
+
+            <!-- Netflix -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-org">Netflix</div>
+                <div class="timeline-role">Senior AV Infrastructure Engineer, Operations</div>
+                <div class="timeline-date">Jan 2020 – Present · Los Angeles, CA</div>
+                <ul>
+                    <li>Own the enterprise meeting room and collaboration stack — Google Workspace tenant policy, OU design, least-privilege access, and device/software lifecycles across [X] rooms in [X] locations.</li>
+                    <li>Wrote the automation that keeps the fleet running: Python and Bash scripts against REST APIs and webhooks handle provisioning, device lifecycle, and incident-response workflows — turning days-long processes into minutes.</li>
+                    <li>Built a multi-source telemetry framework that tracks endpoint health and latency fleet-wide; procurement and lifecycle decisions now come from that data instead of gut feel.</li>
+                    <li>Lead technical vendor evaluations and RFPs for enterprise hardware and SaaS; negotiate requirements and hold integrators and MSPs to enterprise SLAs.</li>
+                    <li>Wrote the documentation no one else had time to write — architecture specs, SOPs, process flows, end-user guides — now the standard reference for distributed teams.</li>
+                    <li>Trusted technical partner to C-level leadership: translate complex architectures into plain language and keep company-wide all-hands and high-profile events running smoothly.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-role">Senior IT Support Engineer</div>
+                <div class="timeline-date">Dec 2012 – Jan 2020 · Los Angeles, CA</div>
+                <ul>
+                    <li>Co-led the migration from on-premise Exchange to Google Workspace and the global fleet move to Windows 10 — <strong>2,000+ users, zero operational downtime</strong>, including requirements gathering, pilots, and user enablement.</li>
+                    <li>Ran incident queues, service requests, and problem management in ServiceNow and Jira using ITIL. Recurring issues got permanent system-level fixes, not re-triage.</li>
+                    <li>Decommissioned legacy on-premise print servers by rolling out cloud-managed printing internationally, cutting [X] servers and their associated operational overhead.</li>
+                    <li>Served on the corporate Anti-Malware Task Force — endpoint security baselines, compliance policies, secure hardware lifecycle management.</li>
+                </ul>
+            </div>
+
+            <!-- Google -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-org">Google</div>
+                <div class="timeline-role">Internal Technology Resident</div>
+                <div class="timeline-date">Aug 2010 – Feb 2012 · Mountain View, CA &amp; Seattle, WA</div>
+                <ul>
+                    <li>Provided Tier-2/3 diagnosis and TechStop walk-up support for engineering and business teams across macOS, Linux, and web applications.</li>
+                    <li>Built and maintained multi-node VMware ESXi test environments to validate software packages, scripts, and OS images ahead of production rollouts.</li>
+                    <li>Designed and taught internal training — including "macOS Fundamentals" — that got technical and non-technical staff productive faster.</li>
+                </ul>
+            </div>
+
+            <!-- Lakin Tire -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot"></div>
+                <div class="timeline-org">Lakin Tire West</div>
+                <div class="timeline-role">IT Support Administrator</div>
+                <div class="timeline-date">Feb 2012 – Dec 2012 · Santa Fe Springs, CA</div>
+                <ul>
+                    <li>Worked with the IT Director to plan and execute the Exchange 2003 → 2010 upgrade and stand up core IT for new regional logistics facilities.</li>
+                </ul>
+            </div>
+        </div>
+
+        <a class="resume-cta" href="resume.pdf" download>⬇ Download resume (PDF)</a>
+    </section>
+
+    <!-- ─── Skills ─── -->
+    <section id="skills">
+        <h2><span class="anchor">#</span>Skills</h2>
+        <div class="section-sub">The tools and disciplines I work with daily — or build with on weekends.</div>
+        <div class="skills-grid">
+            <div class="skill-card fade-in">
+                <h3>SaaS &amp; Identity</h3>
+                <p>Google Workspace (Admin Console, GAM), Slack Enterprise Grid, ServiceNow (ITSM/ITIL), Jira &amp; Confluence, Zoom, Okta, RBAC</p>
+            </div>
+            <div class="skill-card fade-in">
+                <h3>Automation</h3>
+                <p>Python, Bash, REST APIs, webhooks, JSON, Git, n8n, Zapier, Workato</p>
+            </div>
+            <div class="skill-card fade-in">
+                <h3>Infrastructure</h3>
+                <p>Linux (Debian/Ubuntu), Docker, Unraid, enterprise networking (DNS/DHCP/TCP/IP, VLANs), endpoint security, zero-trust architecture</p>
+            </div>
+            <div class="skill-card fade-in">
+                <h3>Analysis &amp; Delivery</h3>
+                <p>Requirements gathering, process mapping, architecture specs, UAT, change management, RFP/SLA management, telemetry &amp; metrics</p>
+            </div>
+            <div class="skill-card fade-in">
+                <h3>Applied AI</h3>
+                <p>Claude (prompting, tool-calling), Model Context Protocol (MCP), Ollama, local model deployment, AI-assisted internal tooling</p>
+            </div>
+            <div class="skill-card fade-in">
+                <h3>Certification</h3>
+                <p>Certified Technology Specialist (CTS) — AVIXA</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Lab ─── -->
+    <section id="lab">
+        <h2><span class="anchor">#</span>Lab / Applied AI</h2>
+        <div class="section-sub">The stuff that doesn't fit on a resume page — self-hosted, self-taught, self-funded.</div>
+
+        <div class="project-card fade-in">
+            <div class="project-tags"><span>Ollama</span><span>RTX 5080</span></div>
+            <h3>Local LLM Inference Server</h3>
+            <p>
+                Run quantized models (DeepSeek R1 14B, Qwen 2.5 14B, Gemma 4 12B) on a dedicated GPU rig with Ollama, proxied through a Docker-based fallback router on Unraid that routes local → OpenRouter when the PC is off or gaming. ~70 t/s on the 5080, tool-calling evaluated per model in a test harness.
+            </p>
+        </div>
+
+        <div class="project-card fade-in">
+            <div class="project-tags"><span>MCP</span><span>Agents SDK</span><span>Cloudflare Workers</span></div>
+            <h3>Model Context Protocol Integrations</h3>
+            <p>
+                Built MCP servers and bridges that give local agent runtimes access to internal tools, services, and data — including a Cloudflare Worker bridge for the Even Realities G2 smart glasses that routes voice commands through the same agent pipeline I use on desktop.
+            </p>
+        </div>
+
+        <div class="project-card fade-in">
+            <div class="project-tags"><span>n8n</span><span>Whisper</span><span>Memos</span></div>
+            <h3>Voice → Second Brain Pipeline</h3>
+            <p>
+                Voice notes transcribed via a local faster-whisper endpoint, routed through n8n workflows, and stored in a self-hosted Memos instance. The result: a searchable personal knowledge base I can add to hands-free — driving, cooking, or walking the dog.
+            </p>
+        </div>
+
+        <div class="project-card fade-in">
+            <div class="project-tags"><span>Home Assistant</span><span>SolarEdge</span><span>Docker</span></div>
+            <h3>Home Automation &amp; Energy Monitoring</h3>
+            <p>
+                100TB+ Unraid server running the whole media stack (Sonarr, Radarr, Plex, *arr suite), plus Home Assistant OS in a VM for lights, locks, sensors, and solar energy automation. SolarEdge fully integrated — automated WOL for the GPU server during peak solar hours.
+            </p>
+        </div>
+
+        <div class="project-card fade-in">
+            <div class="project-tags"><span>Even G2</span><span>Wearables</span><span>Voice UI</span></div>
+            <h3>HUD AI Agent (Even Realities G2)</h3>
+            <p>
+                Integrating smart glasses as a voice-driven AI terminal — the same agent, memory, and tools from my desktop, delivered through a monochrome HUD. In progress: proactive notifications, context-aware briefings, and glanceable lab alerts.
+            </p>
+        </div>
+    </section>
+
+    <!-- ─── Contact ─── -->
+    <section id="contact">
+        <h2><span class="anchor">#</span>Contact</h2>
+        <div class="section-sub" style="margin-bottom: 0;">Say hi, send a signal, or connect on the grid.</div>
+        <div class="contact-links">
+            <a href="mailto:abalingit@gmail.com">✉ abalingit@gmail.com</a>
+            <a href="https://linkedin.com/in/abalingit/" target="_blank" rel="noopener">↗ LinkedIn</a>
+            <a href="https://github.com/abalingit" target="_blank" rel="noopener">↗ GitHub</a>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Built by hand. No frameworks consumed in the making of this page.<br>
+    Andrew Balingit &middot; 2026
+</footer>
+
+<script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
